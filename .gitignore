@@ -4,5 +4,3 @@ node_modules
 *.svn
 *.iml
 *.xml
-serve/node_modules
-serve/.gitignore
