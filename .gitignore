@@ -4,3 +4,4 @@ node_modules
 *.svn
 *.iml
 *.xml
+*
