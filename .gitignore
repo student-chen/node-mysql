@@ -1,0 +1,8 @@
+node_modules
+.gitignore
+*.idea
+*.svn
+*.iml
+*.xml
+serve/node_modules
+serve/.gitignore
