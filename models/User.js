@@ -16,12 +16,12 @@ const User = dbServer.sequelize.define('users', {
         type: DataTypes.STRING,
         field: 'account',
     },
-    // permission: {
-    //     type: DataTypes.INTEGER,
-    //     field: 'permission',
-    //     allowNull: false,
-    //     defaultValue: 0, // 0: 普通用户, 1: 管理员
-    // },
+    permission: {
+        type: DataTypes.INTEGER,
+        field: 'permission',
+        allowNull: false,
+        defaultValue: 0, // 0: 普通用户, 1: 管理员
+    },
     password: {
         type: DataTypes.STRING,
         field: 'password',

@@ -1,5 +1,6 @@
 /**
  * 发送邮件验证码的中间件
+ * 根据用户输入的邮箱发送随机6位验证码到指定邮箱
  */
 
 const nodemailer = require('nodemailer')
