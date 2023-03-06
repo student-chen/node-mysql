@@ -1,3 +1,6 @@
+/**
+ * 注册、账号登录、邮箱登录、发送邮箱验证码路由
+ */
 module.exports = app => {
     const express = require('express')
     const moment = require('moment')
@@ -10,7 +13,6 @@ module.exports = app => {
     localStorage = new LocalStorage('./scratch')
     const jwt = require('jsonwebtoken')
     const privateKey = app.get("superSecret")
-    const assert = require('http-assert')
     const bcrypt = require('bcryptjs')
 
     // 注册
@@ -35,9 +37,9 @@ module.exports = app => {
     router.post('/loginAccount', async (req, res) => {
         const { account, password } = req.body
         const findUser = await User.findOne({ where: { account } }) // 看数据库有没有这个人
-        assert(findUser, 400, "用户不存在")
+        if(!findUser) return res.send({ status: 400, type: 'failure', message: '用户不存在'})
         const isPass = bcrypt.compareSync(password, findUser.password)  // 校验密码
-        assert(isPass, 400, "密码错误")
+        if(!isPass) return res.send({ status: 400, type: 'failure', message: '密码错误'})
         const token = jwt.sign({ objId: findUser.objId }, privateKey)
         res.send({ status: 200, type: 'success', message: '登录成功', resultValue: findUser, token })
         res.end()

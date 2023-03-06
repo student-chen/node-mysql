@@ -10,5 +10,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 require('./router/index')(app)
+require('./router/role')(app)
+require('./router/user')(app)
 
 app.listen(APP_PORT, () => { console.log(`server is starting：${SERVE_ADDRESS}:${APP_PORT}`) })
