@@ -45,7 +45,6 @@ module.exports = app => {
     // 发送邮箱验证码
     router.post('/sendCode', async (req, res) => {
         const randomCode = ('000000' + Math.floor(Math.random() * 999999)).slice(-6)
-        console.log(randomCode)
         const { account } = req.body
         const content = configCode(account, randomCode)
         const sendResult = sendEmail({ email: account, content })
@@ -57,9 +56,8 @@ module.exports = app => {
 
     // 邮箱登录
     router.post('/loginEmail', async (req, res) => {
-        const randomCode = localStorage.getItem('randomCode')
         const { account, code, permission } = req.body
-        if(code !== randomCode) return res.send({ status: 400, message: '当前输入的验证码与发送不一致，请确认' })
+        if(code !== localStorage.getItem('randomCode')) return res.send({ status: 400, message: '当前输入的验证码与发送不一致，请确认' })
         const findResult = await User.findOne({ where: { account, permission } })
         console.log(findResult)
         if(!findResult) return res.send({ status: 400, message: '该账号未注册,请先注册或用户身份错误' })
