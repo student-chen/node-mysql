@@ -86,6 +86,6 @@ const User = dbServer.sequelize.define('users', {
         type: DataTypes.DATE,
         field: 'updateAt'
     },
-},{tableName: 'users',timestamps: false})
+},{ tableName: 'users',timestamps: false })
 
 module.exports = User

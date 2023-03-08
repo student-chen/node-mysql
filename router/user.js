@@ -17,7 +17,7 @@ module.exports = app => {
     const createAt = moment().format('YYYY-MM-DD HH:mm:ss')
     const objId = UUID.v1()
     const { account, password, user_name, email, sex, age, birthDay, birthPlace, address, resume, hobby, level, status, permission } = req.body
-    if (permission !== '1') return res.send({ status: 400, message: '当前用户无权限新增' })
+    if (permission === '01') return res.send({ status: 400, message: '当前用户无权限新增' })
     // 加密明文密码
     const salt = bcrypt.genSaltSync(10)
     const newPsd = bcrypt.hashSync(password, salt)
@@ -34,7 +34,7 @@ module.exports = app => {
   // 用户权限之一： 删除用户
   router.post('/deleteOneUser', async (req, res) => {
     const { objId, permission } = req.body
-    if (permission !== '1') return res.send({ status: 400, message: '当前用户无权限删除' })
+    if (permission === '01') return res.send({ status: 400, message: '当前用户无权限删除' })
     const findRes = await User.findOne({ where: { objId } })
     if (!findRes) return res.send({ status: 400, message: '该用户尚未注册', resultValue: false, type: 'error' })
     await User.destroy({ where: { objId } })
@@ -45,7 +45,8 @@ module.exports = app => {
   // 用户权限之一： 批量删除用户
   router.post('/deleteSomeUser', async (req, res) => {
     const { objId, permission } = req.body
-    if (permission !== '1') return res.send({ status: 400, message: '当前用户无权限删除' })
+    // objId多个objId拼接起来的字符串
+    if (permission === '01') return res.send({ status: 400, message: '当前用户无权限删除' })
     const objIds = objId.split(',')
     // if(!objIds.length) return 前端处理至少选两条数据删除
     for (let index = 0; index < objIds.length; index++) {
@@ -58,7 +59,7 @@ module.exports = app => {
   // 用户权限之一： 修改用户信息
   router.post('/updateUser', async (req, res) => {
     const { objId, password, permission } = req.body
-    if (permission !== '1') return res.send({ status: 400, message: '当前用户无权限修改' })
+    if (permission === '01') return res.send({ status: 400, message: '当前用户无权限修改' })
     let newData = {}
     if(password) {
       const salt = bcrypt.genSaltSync(10)

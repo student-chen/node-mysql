@@ -12,10 +12,22 @@ const Role = dbServer.sequelize.define('roles', {
     allowNull: false,
     primaryKey: true,
   },
-  type: {
+  userObjId: {
     type: DataTypes.STRING,
-    field: 'type'
-  }
-})
+    field: 'userObjId'
+  },
+  name: {
+    type: DataTypes.STRING,
+    field: 'name'
+  },
+  permission: {
+    type: DataTypes.STRING,
+    field: 'permission'
+  },
+  createAt: {
+    type: DataTypes.DATE,
+    field: 'createAt'
+  },
+},{ tableName: 'roles',timestamps: false })
 
 module.exports = Role

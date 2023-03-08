@@ -12,5 +12,7 @@ app.use(cors())
 require('./router/index')(app)
 require('./router/dict')(app)
 require('./router/user')(app)
+require('./router/role')(app)
+require('./router/user_role')(app)
 
 app.listen(APP_PORT, () => { console.log(`server is starting：${SERVE_ADDRESS}:${APP_PORT}`) })
