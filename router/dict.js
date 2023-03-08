@@ -20,9 +20,9 @@ module.exports = app => {
     const permissionArr = rows.filter(item => item.type === 'permission').map(it => { return { text: it.value, codeValue: it.codeValue } })
     const sexArr= rows.filter(item => item.type === 'sex').map(it => { return { text: it.value, codeValue: it.codeValue } })
     const statusDict = { name: 'status', dict: statusArr }
-    const permissionDict = { name: 'status', dict: permissionArr }
-    const sexDict = { name: 'status', dict: sexArr }
-    const levelDict = { name: 'status', dict: levelArr }
+    const permissionDict = { name: 'permission', dict: permissionArr }
+    const sexDict = { name: 'sex', dict: sexArr }
+    const levelDict = { name: 'level', dict: levelArr }
     const resultValue = [statusDict, permissionDict, levelDict, sexDict]
     res.send({ status: 200, message: '获取全局字典成功', count, resultValue, type: 'success'})
     res.end()
