@@ -82,14 +82,7 @@ module.exports = app => {
     const params = filterParams({ status, address, sex, level, age, school })
     searchData = await User.findAll({ where: params }, { raw: true })
     if(!searchData.length) return res.send({ status: 200, message: '暂无数据', resultValue: false, type: 'success'})
-    res.send({
-      status: 200,
-      message: '查询成功',
-      resultValue: {
-        items: searchData,
-        count: searchData.length
-      },
-      type: 'success'})
+    res.send({ status: 200, message: '查询成功', resultValue: { items: searchData, count: searchData.length }, type: 'success'})
     res.end()
   })
 

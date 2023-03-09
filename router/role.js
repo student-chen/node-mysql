@@ -14,11 +14,11 @@ module.exports = app => {
 
   // 新建角色(只能新建管理员与普通用户, 只能单个新建)
   router.post('/addRole', async (req, res) => {
-    const { permission, name, permissionType } = req.body
+    const { permission, name, permissionType, status } = req.body
     // 后端检查权限，前端也可以
     if (permissionType !== '03') return res.send({ status: 400, message: '当前用户无权限新建角色' })
     const createAt = moment().format('YYYY-MM-DD HH:mm:ss')
-    const addData = { objId: UUID.v1(), name, createAt, permission }
+    const addData = { objId: UUID.v1(), name, createAt, permission, status }
     const roleResult = await Role.findOne({ where: { permission } })
     if (roleResult) return res.send({ status: 400, message: '当前角色已生成', type: 'error', resultValue: false })
     const createRoleResult = await Role.create(addData)
