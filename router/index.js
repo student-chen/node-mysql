@@ -66,6 +66,13 @@ module.exports = app => {
         res.end()
     })
 
+    // 退出登录
+    router.post('/logout', async (req, res) => {
+        // 前端删除缓存缓存中的token
+        res.send({ status: 200, message: '已退出登录', type: 'success', resultValue: req.body})
+        res.end()
+    })
+
     /**
      * 处理路由根路径
      * 设置请求路径: http://127.0.0.1:3000/api/v1 + (router文件内的路径)
