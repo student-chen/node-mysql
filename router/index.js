@@ -1,7 +1,3 @@
-/**
- * 用户注册、账号登录、邮箱登录、发送邮箱验证码、头像上传
- */
-
 module.exports = app => {
   const express = require('express')
   const moment = require('moment')
